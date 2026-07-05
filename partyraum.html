@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partyraum & Außenbereich – Bull Sommerfest 2026</title>
+  <title>Partyraum & Außenbereich – Bull Sommerfest 2027</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,22 +11,29 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
-    <a href="index.html">Start</a>
-    <a href="zimmer.html">Zimmer</a>
-    <a href="lageplaene.html">Lagepläne</a>
-    <a href="partyraum.html" class="active">Partyraum</a>
-    <a href="anfahrt.html">Anfahrt</a>
-    <a href="samstag.html">Party-Samstag</a>
+    <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Start</a>
+      <a href="zimmer.html">Zimmer</a>
+      <a href="lageplaene.html">Lagepläne</a>
+      <a href="partyraum.html" class="active">Partyraum</a>
+      <a href="anfahrt.html">Anfahrt</a>
+      <a href="samstag.html">Party-Samstag</a>
+    </div>
   </div>
 </nav>
 
 <div class="page-header">
   <h1>Partyraum &amp; Außenbereich</h1>
-  <p>Impressionen vom Festgelände</p>
+  <p>Impressionen vom Festgelände – zum Vergrößern anklicken</p>
 </div>
 
 <main>
-  <div class="gallery" id="gallery">
+  <div class="gallery">
     <img src="img/partyraum_1.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
     <img src="img/partyraum_2.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
     <img src="img/partyraum_3.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
@@ -46,24 +53,17 @@
 </main>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <span class="lightbox-close">&times;</span>
   <img id="lightbox-img" src="" alt="Vollbild">
 </div>
 
-<footer>
-  Sommer-Fest der Familie Bull · Holthof 2026
-</footer>
+<footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
 
 <script>
-function openLightbox(src) {
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox').classList.add('open');
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 </script>
-
 </body>
 </html>

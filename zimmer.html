@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zimmer & Belegung – Bull Sommerfest 2026</title>
+  <title>Zimmer & Belegung – Bull Sommerfest 2027</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,12 +11,19 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
-    <a href="index.html">Start</a>
-    <a href="zimmer.html" class="active">Zimmer</a>
-    <a href="lageplaene.html">Lagepläne</a>
-    <a href="partyraum.html">Partyraum</a>
-    <a href="anfahrt.html">Anfahrt</a>
-    <a href="samstag.html">Party-Samstag</a>
+    <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Start</a>
+      <a href="zimmer.html" class="active">Zimmer</a>
+      <a href="lageplaene.html">Lagepläne</a>
+      <a href="partyraum.html">Partyraum</a>
+      <a href="anfahrt.html">Anfahrt</a>
+      <a href="samstag.html">Party-Samstag</a>
+    </div>
   </div>
 </nav>
 
@@ -28,67 +35,58 @@
 <main>
   <div class="hinweis">
     ℹ️ <strong>Bitte bringt Handtücher, Laken, Bettzeug und Bettwäsche selbst mit.</strong><br>
-    Für Details zu den Zimmern bitte auf den jeweiligen Titel klicken.
+    Für Details und Fotos zu den Zimmern bitte auf den jeweiligen Titel klicken.
   </div>
 
   <div class="zimmer-grid">
-
     <div class="zimmer-card">
-      <h3><a href="fw1.html">Ferienwohnung 1</a></h3>
+      <h3><a href="fw1.html">🏠 Ferienwohnung 1</a></h3>
       <ul>
-        <li>– Zimmer 1: Inci &amp; Torsten</li>
-        <li>– Zimmer 2: Nicht belegt (Alkoven)</li>
+        <li>Zimmer 1: Inci &amp; Torsten</li>
+        <li>Zimmer 2: Nicht belegt (Alkoven)</li>
       </ul>
     </div>
-
     <div class="zimmer-card">
-      <h3><a href="fw2.html">Ferienwohnung 2</a></h3>
+      <h3><a href="fw2.html">🏠 Ferienwohnung 2</a></h3>
       <ul>
-        <li>– Zimmer 1: Bärbel &amp; Dietmar</li>
-        <li>– Zimmer 2: Trine &amp; Annemie</li>
+        <li>Zimmer 1: Bärbel &amp; Dietmar</li>
+        <li>Zimmer 2: Trine &amp; Annemie</li>
       </ul>
     </div>
-
     <div class="zimmer-card">
-      <h3><a href="fw3.html">Ferienwohnung 3</a></h3>
+      <h3><a href="fw3.html">🏠 Ferienwohnung 3</a></h3>
       <ul>
-        <li>– Zimmer 1: Christl &amp; Carsten</li>
-        <li>– Zimmer 2: Dana &amp; Ronny</li>
+        <li>Zimmer 1: Christl &amp; Carsten</li>
+        <li>Zimmer 2: Dana &amp; Ronny</li>
       </ul>
     </div>
-
     <div class="zimmer-card">
-      <h3><a href="dachgeschoss.html">Dachgeschoss</a></h3>
+      <h3><a href="dachgeschoss.html">🔼 Dachgeschoss</a></h3>
       <ul>
-        <li>– Zimmer 1: Petra &amp; Hans-Werner</li>
-        <li>– Zimmer 2: Arlett &amp; Jens</li>
-        <li>– Zimmer 3: Nicht belegt (4er)</li>
+        <li>Zimmer 1: Petra &amp; Hans-Werner</li>
+        <li>Zimmer 2: Arlett &amp; Jens</li>
+        <li>Zimmer 3: Nicht belegt (4er)</li>
       </ul>
     </div>
-
     <div class="zimmer-card">
-      <h3><a href="pferdestall-unten.html">Pferdestall unten</a></h3>
+      <h3><a href="pferdestall-unten.html">🐴 Pferdestall unten</a></h3>
       <ul>
-        <li>– Zimmer 1: Mika &amp; Paul</li>
+        <li>Zimmer 1: Mika &amp; Paul</li>
       </ul>
     </div>
-
     <div class="zimmer-card">
-      <h3><a href="pferdestall-oben.html">Pferdestall oben</a></h3>
+      <h3><a href="pferdestall-oben.html">🐴 Pferdestall oben</a></h3>
       <ul>
-        <li>– Zimmer 2: Karen &amp; Karsten</li>
-        <li>– Zimmer 3: Sinja &amp; Theresa &amp; Anne</li>
-        <li>– Zimmer 4: Tina &amp; Reimund</li>
-        <li>– Zimmer 5: Mareike &amp; Guido &amp; Jakob</li>
+        <li>Zimmer 2: Karen &amp; Karsten</li>
+        <li>Zimmer 3: Sinja &amp; Theresa &amp; Anne</li>
+        <li>Zimmer 4: Tina &amp; Reimund</li>
+        <li>Zimmer 5: Mareike &amp; Guido &amp; Jakob</li>
       </ul>
     </div>
-
   </div>
 </main>
 
-<footer>
-  Sommer-Fest der Familie Bull · Holthof 2026
-</footer>
-
+<footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
+<script>function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}</script>
 </body>
 </html>

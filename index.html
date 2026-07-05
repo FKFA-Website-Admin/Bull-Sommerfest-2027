@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sommer-Fest der Familie Bull – Holthof 2026</title>
+  <title>Sommer-Fest der Familie Bull – Holthof 2027</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,12 +11,19 @@
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
-    <a href="index.html" class="active">Start</a>
-    <a href="zimmer.html">Zimmer</a>
-    <a href="lageplaene.html">Lagepläne</a>
-    <a href="partyraum.html">Partyraum</a>
-    <a href="anfahrt.html">Anfahrt</a>
-    <a href="samstag.html">Party-Samstag</a>
+    <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Start</a>
+      <a href="zimmer.html">Zimmer</a>
+      <a href="lageplaene.html">Lagepläne</a>
+      <a href="partyraum.html">Partyraum</a>
+      <a href="anfahrt.html">Anfahrt</a>
+      <a href="samstag.html">Party-Samstag</a>
+    </div>
   </div>
 </nav>
 
@@ -25,27 +32,77 @@
   <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>Sommer-Fest der Familie Bull</h1>
-    <p>auf dem Holthof &nbsp;·&nbsp; Sommer 2026</p>
+    <p class="subtitle">auf dem Holthof &nbsp;·&nbsp; 08. Juli 2027</p>
   </div>
 </div>
 
-<div class="card-grid">
-  <a class="card" href="zimmer.html">Zimmer &amp;<br>Belegung</a>
-  <a class="card" href="lageplaene.html">Lagepläne</a>
-  <a class="card" href="partyraum.html">Partyraum &amp;<br>Außenbereich</a>
-  <a class="card" href="anfahrt.html">Anfahrt &amp;<br>Parken</a>
-  <a class="card highlight" href="samstag.html">Party-<br>Samstag</a>
+<div class="countdown-section">
+  <div class="countdown-label">Noch bis zum großen Fest</div>
+  <div class="countdown-boxes" id="countdown">
+    <div class="countdown-box"><span class="num" id="cd-days">–</span><span class="unit">Tage</span></div>
+    <div class="countdown-box"><span class="num" id="cd-hours">–</span><span class="unit">Stunden</span></div>
+    <div class="countdown-box"><span class="num" id="cd-min">–</span><span class="unit">Minuten</span></div>
+    <div class="countdown-box"><span class="num" id="cd-sec">–</span><span class="unit">Sekunden</span></div>
+  </div>
 </div>
 
-<main>
-  <h2>Willkommen!</h2>
-  <p>Auf dieser Seite findet ihr alle wichtigen Informationen rund um unser Familien-Sommerfest auf dem wunderschönen Holthof.</p>
-  <p>Nutzt die Karten oben oder die Navigation, um zu den einzelnen Bereichen zu gelangen.</p>
-</main>
+<h2 class="section-title">Alles auf einen Blick</h2>
+<p class="section-sub">Wähle einen Bereich, um mehr zu erfahren</p>
+
+<div class="card-grid">
+  <a class="card" href="zimmer.html">
+    <span class="icon">🛏️</span>Zimmer &amp; Belegung
+  </a>
+  <a class="card" href="lageplaene.html">
+    <span class="icon">🗺️</span>Lagepläne
+  </a>
+  <a class="card" href="partyraum.html">
+    <span class="icon">🎉</span>Partyraum &amp; Außen
+  </a>
+  <a class="card" href="anfahrt.html">
+    <span class="icon">🚗</span>Anfahrt &amp; Parken
+  </a>
+  <a class="card highlight" href="samstag.html">
+    <span class="icon">🌟</span>Party-Samstag
+  </a>
+</div>
 
 <footer>
-  Sommer-Fest der Familie Bull · Holthof 2026
+  Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027
 </footer>
+
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Countdown bis 08.07.2027 12:00 Uhr
+const target = new Date('2027-07-08T12:00:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<p class="countdown-done">🎉 Das Fest hat begonnen!</p>';
+    return;
+  }
+
+  const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-min').textContent   = String(minutes).padStart(2, '0');
+  document.getElementById('cd-sec').textContent   = String(seconds).padStart(2, '0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
 
 </body>
 </html>

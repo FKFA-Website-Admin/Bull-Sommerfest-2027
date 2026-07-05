@@ -3,30 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferienwohnung 2 – Bull Sommerfest 2026</title>
+  <title>Ferienwohnung 2 – Bull Sommerfest 2027</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
-    <a href="index.html">Start</a>
-    <a href="zimmer.html" class="active">Zimmer</a>
-    <a href="lageplaene.html">Lagepläne</a>
-    <a href="partyraum.html">Partyraum</a>
-    <a href="anfahrt.html">Anfahrt</a>
-    <a href="samstag.html">Party-Samstag</a>
+    <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Start</a>
+      <a href="zimmer.html" class="active">Zimmer</a>
+      <a href="lageplaene.html">Lagepläne</a>
+      <a href="partyraum.html">Partyraum</a>
+      <a href="anfahrt.html">Anfahrt</a>
+      <a href="samstag.html">Party-Samstag</a>
+    </div>
   </div>
 </nav>
-
-<div class="page-header">
-  <h1>Ferienwohnung 2</h1>
-</div>
-
+<div class="page-header"><h1>🏠 Ferienwohnung 2</h1></div>
 <main>
   <a class="back-link" href="zimmer.html">← Zurück zur Zimmerübersicht</a>
-
   <div class="room-info">
     <h2>Belegung</h2>
     <ul>
@@ -34,18 +35,28 @@
       <li>Zimmer 2: Trine &amp; Annemie</li>
     </ul>
   </div>
-
   <div class="room-images">
-    <img src="img/fw2_1.jpg" alt="Ferienwohnung 2">
-    <img src="img/fw2_2.jpg" alt="Ferienwohnung 2">
-    <img src="img/fw2_3.jpg" alt="Ferienwohnung 2">
-    <img src="img/fw2_4.jpg" alt="Ferienwohnung 2">
+    <img src="img/fw2_1.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_2.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_3.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_4.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_5.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_6.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_7.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_8.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+    <img src="img/fw2_9.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
   </div>
 </main>
-
-<footer>
-  Sommer-Fest der Familie Bull · Holthof 2026
-</footer>
-
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Vollbild">
+</div>
+<footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+</script>
 </body>
 </html>
