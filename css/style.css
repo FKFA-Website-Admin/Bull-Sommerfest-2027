@@ -616,3 +616,7 @@ footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
 }
 
 .anfahrt-map-link:hover { background: var(--navy-dark); transform: translateY(-2px); }
+.anfahrt-map-link.secondary { background: var(--text-muted); }
+.anfahrt-map-link.secondary:hover { background: var(--text); }
+
+.map-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
