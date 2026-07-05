@@ -34,18 +34,52 @@
 
 <main>
   <div class="lageplan-grid">
-    <img src="img/lageplan_1.jpg" alt="Lageplan 1">
-    <img src="img/lageplan_2.jpg" alt="Lageplan 2">
-    <img src="img/lageplan_3.jpg" alt="Lageplan 3">
-    <img src="img/lageplan_4.jpg" alt="Lageplan 4">
-    <img src="img/lageplan_5.jpg" alt="Lageplan 5">
-    <img src="img/lageplan_6.jpg" alt="Lageplan 6">
-    <img src="img/lageplan_7.jpg" alt="Lageplan 7">
-    <img src="img/lageplan_8.jpg" alt="Lageplan 8">
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_1.jpg" alt="Grundriss ganzes Haus – Erdgeschoss" onclick="openLightbox(this.src)">
+      <figcaption>Grundriss ganzes Haus – Erdgeschoss</figcaption>
+    </figure>
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_8.jpg" alt="Pferdestall" onclick="openLightbox(this.src)">
+      <figcaption>Pferdestall</figcaption>
+    </figure>
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_3.jpg" alt="Grundriss Pferdestall oben & unten" onclick="openLightbox(this.src)">
+      <figcaption>Grundriss Pferdestall oben &amp; unten</figcaption>
+    </figure>
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_4.jpg" alt="Ferienwohnung 1 oben & unten" onclick="openLightbox(this.src)">
+      <figcaption>Ferienwohnung 1 oben &amp; unten</figcaption>
+    </figure>
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_5.jpg" alt="Ferienwohnung 2" onclick="openLightbox(this.src)">
+      <figcaption>Ferienwohnung 2</figcaption>
+    </figure>
+
+    <figure class="lageplan-figure">
+      <img src="img/lageplan_9.jpg" alt="Ferienwohnung 3" onclick="openLightbox(this.src)">
+      <figcaption>Ferienwohnung 3</figcaption>
+    </figure>
+
   </div>
 </main>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Vollbild">
+</div>
+
 <footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
-<script>function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}</script>
+
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+</script>
 </body>
 </html>
