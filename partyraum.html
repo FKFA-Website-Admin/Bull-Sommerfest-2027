@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partyraum & Außenbereich – Bull Sommerfest 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
+    <a href="index.html">Start</a>
+    <a href="zimmer.html">Zimmer</a>
+    <a href="lageplaene.html">Lagepläne</a>
+    <a href="partyraum.html" class="active">Partyraum</a>
+    <a href="anfahrt.html">Anfahrt</a>
+    <a href="samstag.html">Party-Samstag</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Partyraum &amp; Außenbereich</h1>
+  <p>Impressionen vom Festgelände</p>
+</div>
+
+<main>
+  <div class="gallery" id="gallery">
+    <img src="img/partyraum_1.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_2.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_3.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_4.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_5.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_6.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_7.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_8.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_9.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_10.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_11.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_12.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_13.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_14.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+    <img src="img/partyraum_15.jpg" alt="Partyraum" onclick="openLightbox(this.src)">
+  </div>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="Vollbild">
+</div>
+
+<footer>
+  Sommer-Fest der Familie Bull · Holthof 2026
+</footer>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
