@@ -706,58 +706,59 @@ p { margin-bottom: 1rem; }
   text-align: center;
 }
 
-.mitbring-tabelle-wrap {
-  overflow-x: auto;
+.mitbring-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.75rem;
   margin-bottom: 2.5rem;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
 }
 
-.mitbring-tabelle {
-  width: 100%;
-  border-collapse: collapse;
+.mitbring-card {
   background: var(--white);
-  font-size: 0.9rem;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.mitbring-tabelle th {
-  background: var(--navy);
-  color: var(--white);
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
-.mitbring-tabelle th:first-child { border-radius: 10px 0 0 0; }
-.mitbring-tabelle th:last-child { border-radius: 0 10px 0 0; }
-
-.mitbring-tabelle td {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid var(--beige-mid);
-  vertical-align: top;
-}
-
-.mitbring-tabelle tr:last-child td { border-bottom: none; }
-.mitbring-tabelle tr:hover td { background: var(--beige-light); }
-
-.mitbring-tabelle .kat-pill {
+.mitbring-card .kat-pill {
   display: inline-block;
   padding: 0.15rem 0.6rem;
   border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   background: rgba(0,74,173,0.1);
   color: var(--navy);
   white-space: nowrap;
+  align-self: flex-start;
 }
 
-.mitbring-tabelle .kommentar-text {
-  color: var(--text-muted);
+.mitbring-card .card-was {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.mitbring-card .card-meta {
   font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.mitbring-card .card-meta strong {
+  color: var(--text);
+}
+
+.mitbring-card .card-kommentar {
+  font-size: 0.8rem;
+  color: var(--text-muted);
   font-style: italic;
+  border-top: 1px solid var(--beige-mid);
+  padding-top: 0.3rem;
+  margin-top: 0.1rem;
 }
 
 .mitbring-leer {
@@ -765,6 +766,10 @@ p { margin-bottom: 1rem; }
   padding: 2rem;
   color: var(--text-muted);
   font-style: italic;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-bottom: 2.5rem;
 }
 
 /* Form */

@@ -34,49 +34,8 @@
 </div>
 
 <main>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-time">ab 15:00</div>
-      <div class="timeline-content">
-        <h3>Ankommen &amp; Einrichten</h3>
-        <p>Zimmer beziehen, ankommen, den Hof erkunden.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-time">18:00</div>
-      <div class="timeline-content">
-        <h3>Aperitif &amp; Begrüßung</h3>
-        <p>Gemeinsamer Auftakt im Außenbereich.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-time">19:00</div>
-      <div class="timeline-content">
-        <h3>Abendessen</h3>
-        <p><!-- Details ergänzen --></p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-time">21:00</div>
-      <div class="timeline-content">
-        <h3>Party &amp; Musik</h3>
-        <p><!-- Details ergänzen --></p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-time">open end</div>
-      <div class="timeline-content">
-        <h3>Feiern bis in den Morgen 🎉</h3>
-      </div>
-    </div>
-  </div>
-
-  <div class="hinweis" style="margin-top:2rem;">
-    ℹ️ Das Programm wird noch ergänzt — schaut regelmäßig vorbei!
-  </div>
-
   <!-- ══════════ MITBRINGSLISTE ══════════ -->
-  <div class="mitbring-section">
+  <div class="mitbring-section" id="mitbringsliste">
 
     <div class="mitbring-eyecatcher">
       <span class="emoji-big">🧺</span>
@@ -90,27 +49,10 @@
     </div>
 
     <!-- Kategorie-Übersicht -->
-    <div class="mitbring-kategorien" id="katBadges">
-      <!-- wird per JS befüllt -->
-    </div>
+    <div class="mitbring-kategorien" id="katBadges"></div>
 
-    <!-- Tabelle der Einträge -->
-    <div class="mitbring-tabelle-wrap">
-      <table class="mitbring-tabelle">
-        <thead>
-          <tr>
-            <th>Kategorie</th>
-            <th>Was</th>
-            <th>Wer</th>
-            <th>Menge</th>
-            <th>Kommentar</th>
-          </tr>
-        </thead>
-        <tbody id="mitbringTableBody">
-          <tr><td colspan="5" class="mitbring-leer">⏳ Liste wird geladen…</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <!-- Eintrags-Karten -->
+    <div id="mitbringCards"><div class="mitbring-leer">⏳ Liste wird geladen…</div></div>
 
     <!-- Formular -->
     <div class="mitbring-form-box">
@@ -157,6 +99,49 @@
   </div>
   <!-- ══════════ END MITBRINGSLISTE ══════════ -->
 
+  <h2 class="section-title" style="text-align:left;margin-top:3rem;">📅 Tagesablauf</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-time">ab 15:00</div>
+      <div class="timeline-content">
+        <h3>Ankommen &amp; Einrichten</h3>
+        <p>Zimmer beziehen, ankommen, den Hof erkunden.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">18:00</div>
+      <div class="timeline-content">
+        <h3>Aperitif &amp; Begrüßung</h3>
+        <p>Gemeinsamer Auftakt im Außenbereich.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">19:00</div>
+      <div class="timeline-content">
+        <h3>Abendessen</h3>
+        <p><!-- Details ergänzen --></p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">21:00</div>
+      <div class="timeline-content">
+        <h3>Party &amp; Musik</h3>
+        <p><!-- Details ergänzen --></p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">open end</div>
+      <div class="timeline-content">
+        <h3>Feiern bis in den Morgen 🎉</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="hinweis" style="margin-top:2rem;">
+    ℹ️ Das Programm wird noch ergänzt — schaut regelmäßig vorbei!
+  </div>
+
 </main>
 
 <footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
@@ -183,28 +168,29 @@ async function ladeEintraege() {
     const r = await fetch(API);
     if (!r.ok) throw new Error();
     const data = await r.json();
-    rendereTabelle(data);
+    rendereKarten(data);
     rendereBadges(data);
   } catch {
-    document.getElementById('mitbringTableBody').innerHTML =
-      '<tr><td colspan="5" class="mitbring-leer">⚠️ Liste konnte nicht geladen werden.</td></tr>';
+    document.getElementById('mitbringCards').innerHTML =
+      '<div class="mitbring-leer">⚠️ Liste konnte nicht geladen werden.</div>';
   }
 }
 
-function rendereTabelle(eintraege) {
-  const tbody = document.getElementById('mitbringTableBody');
+function rendereKarten(eintraege) {
+  const wrap = document.getElementById('mitbringCards');
   if (!eintraege.length) {
-    tbody.innerHTML = '<tr><td colspan="5" class="mitbring-leer">Noch keine Einträge — sei der Erste! 🙌</td></tr>';
+    wrap.innerHTML = '<div class="mitbring-leer">Noch keine Einträge — sei der Erste! 🙌</div>';
     return;
   }
-  tbody.innerHTML = eintraege.map(e => `
-    <tr>
-      <td><span class="kat-pill">${esc(e.kategorie)}</span></td>
-      <td><strong>${esc(e.was)}</strong></td>
-      <td>${esc(e.name)}</td>
-      <td>${esc(e.menge || '–')}</td>
-      <td class="kommentar-text">${esc(e.kommentar || '')}</td>
-    </tr>`).join('');
+  wrap.innerHTML = '<div class="mitbring-cards">' +
+    eintraege.map(e => `
+    <div class="mitbring-card">
+      <span class="kat-pill">${esc(e.kategorie)}</span>
+      <div class="card-was">${esc(e.was)}</div>
+      <div class="card-meta">👤 <strong>${esc(e.name)}</strong>${e.menge ? ` · ${esc(e.menge)}` : ''}</div>
+      ${e.kommentar ? `<div class="card-kommentar">💬 ${esc(e.kommentar)}</div>` : ''}
+    </div>`).join('') +
+  '</div>';
 }
 
 function rendereBadges(eintraege) {
