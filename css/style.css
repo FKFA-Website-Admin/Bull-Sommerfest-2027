@@ -451,6 +451,11 @@ p { margin-bottom: 1rem; }
   margin-bottom: 0.75rem;
 }
 
+.photo-group-label.secondary {
+  background: var(--sage);
+  color: var(--navy);
+}
+
 /* ── ROOM PAGES ─────────────────────────────────── */
 .room-images {
   display: grid;
