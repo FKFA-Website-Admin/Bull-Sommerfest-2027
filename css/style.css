@@ -977,6 +977,89 @@ p { margin-bottom: 1rem; }
 .mitbring-feedback.success { background: #e8f5e9; color: #2e7d32; display: block; }
 .mitbring-feedback.error   { background: #fce4ec; color: #c62828; display: block; }
 
+/* ── PINNWAND ───────────────────────────────────── */
+.pinnwand-form-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--accent);
+  margin-bottom: 2.5rem;
+}
+
+.pinnwand-form-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin: 0 0 1.25rem;
+}
+
+.pinnwand-form-box textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--beige);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--beige-light);
+  resize: vertical;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pinnwand-form-box textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: var(--white);
+}
+
+.pin-counter {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.pinnwand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.pin-karte {
+  border-radius: 10px;
+  padding: 1.1rem 1.1rem 0.85rem;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pin-karte:hover {
+  transform: translateY(-3px) rotate(0.5deg);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+}
+
+.pin-nachricht {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.pin-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 0.5rem;
+}
+
+.pin-meta strong { color: var(--text); }
+
 /* ── FOOTER ─────────────────────────────────────── */
 footer {
   background: var(--navy-dark);

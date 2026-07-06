@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinnwand – Sommerfest 2027</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-emoji">🌻</span><span class="logo-text">Sommerfest 2027</span></a>
+    <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Start</a>
+      <a href="zimmer.html">Zimmer</a>
+      <a href="lageplaene.html">Lagepläne</a>
+      <a href="partyraum.html">Partyraum</a>
+      <a href="anfahrt.html">Anfahrt</a>
+      <a href="samstag.html">Party-Samstag</a>
+      <a href="abreise.html">Abreise</a>
+      <a href="pinnwand.html" class="active">Pinnwand</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>📌 Pinnwand</h1>
+  <p>Grüße, Ideen, Fragen, Vorfreude — alles willkommen!</p>
+</div>
+
+<main>
+
+  <!-- Formular -->
+  <div class="pinnwand-form-box">
+    <h2>✍️ Deine Nachricht</h2>
+    <form id="pinnwandForm" onsubmit="submitPin(event)">
+      <div class="form-group">
+        <label for="pin-name">Dein Name *</label>
+        <input type="text" id="pin-name" placeholder="z. B. Karen" required maxlength="80">
+      </div>
+      <div class="form-group" style="margin-top:0.75rem;">
+        <label for="pin-nachricht">Nachricht *</label>
+        <textarea id="pin-nachricht" rows="3" placeholder="Grüße, Ideen, Fragen — alles ist willkommen!" required maxlength="500"></textarea>
+        <span class="pin-counter" id="pinCounter">0 / 500</span>
+      </div>
+      <button type="submit" class="mitbring-submit" id="pinSubmitBtn" style="margin-top:1rem;">
+        📌 Pinnwand heften
+      </button>
+      <div class="mitbring-feedback" id="pinFeedback"></div>
+    </form>
+  </div>
+
+  <!-- Karten -->
+  <div id="pinnwandKarten" class="pinnwand-grid">
+    <div class="mitbring-leer">⏳ Nachrichten werden geladen…</div>
+  </div>
+
+</main>
+
+<footer>Sommer-Fest der Familie Bull · Holthof · 08. Juli 2027</footer>
+
+<script>
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+
+const API = '/api/pinnwand';
+
+// Zeichenzähler
+document.getElementById('pin-nachricht').addEventListener('input', function() {
+  document.getElementById('pinCounter').textContent = this.value.length + ' / 500';
+});
+
+async function ladeNachrichten() {
+  try {
+    const r = await fetch(API);
+    if (!r.ok) throw new Error();
+    const data = await r.json();
+    rendereKarten(data);
+  } catch {
+    document.getElementById('pinnwandKarten').innerHTML =
+      '<div class="mitbring-leer">⚠️ Nachrichten konnten nicht geladen werden.</div>';
+  }
+}
+
+const FARBEN = ['#fff9c4','#ffe0b2','#f8bbd0','#dcedc8','#b3e5fc','#e1bee7','#ffd180','#ccff90'];
+
+function rendereKarten(nachrichten) {
+  const wrap = document.getElementById('pinnwandKarten');
+  if (!nachrichten.length) {
+    wrap.innerHTML = '<div class="mitbring-leer">Noch keine Einträge — sei der Erste! 🙌</div>';
+    return;
+  }
+  wrap.innerHTML = nachrichten.map((n, i) => {
+    const farbe = FARBEN[i % FARBEN.length];
+    return `
+    <div class="pin-karte" style="background:${farbe};">
+      <div class="pin-nachricht">${esc(n.nachricht)}</div>
+      <div class="pin-meta">
+        <strong>${esc(n.name)}</strong>
+        <span>${zeitAgo(n.erstellt_am)}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function zeitAgo(iso) {
+  const d = new Date(iso.replace(' ','T') + 'Z');
+  const diff = Math.floor((Date.now() - d) / 1000);
+  if (diff < 60) return 'gerade eben';
+  if (diff < 3600) return `vor ${Math.floor(diff/60)} Min.`;
+  if (diff < 86400) return `vor ${Math.floor(diff/3600)} Std.`;
+  return `vor ${Math.floor(diff/86400)} Tag(en)`;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+async function submitPin(e) {
+  e.preventDefault();
+  const btn = document.getElementById('pinSubmitBtn');
+  const fb  = document.getElementById('pinFeedback');
+  fb.className = 'mitbring-feedback';
+  btn.disabled = true;
+  btn.textContent = '⏳ Wird gespeichert…';
+
+  const payload = {
+    name:      document.getElementById('pin-name').value.trim(),
+    nachricht: document.getElementById('pin-nachricht').value.trim(),
+  };
+
+  try {
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+    });
+    if (!r.ok) throw new Error();
+    fb.textContent = '✅ Deine Nachricht wurde gepinnt!';
+    fb.className = 'mitbring-feedback success';
+    document.getElementById('pinnwandForm').reset();
+    document.getElementById('pinCounter').textContent = '0 / 500';
+    await ladeNachrichten();
+  } catch {
+    fb.textContent = '❌ Fehler — bitte nochmal versuchen.';
+    fb.className = 'mitbring-feedback error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '📌 Pinnwand heften';
+  }
+}
+
+ladeNachrichten();
+</script>
+</body>
+</html>
