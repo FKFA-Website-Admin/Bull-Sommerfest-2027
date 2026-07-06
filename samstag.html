@@ -48,11 +48,8 @@
       🙌 <strong>Ihr bringt mit:</strong> Kuchen, Salate, Beilagen, Dips, Desserts, Knabberkram — und gerne euer Lieblingsgetränk!
     </div>
 
-    <!-- Kategorie-Übersicht -->
-    <div class="mitbring-kategorien" id="katBadges"></div>
-
-    <!-- Eintrags-Karten -->
-    <div id="mitbringCards"><div class="mitbring-leer">⏳ Liste wird geladen…</div></div>
+    <!-- Accordion pro Kategorie -->
+    <div id="mitbringAccordion"><div class="mitbring-leer">⏳ Liste wird geladen…</div></div>
 
     <!-- Formular -->
     <div class="mitbring-form-box">
@@ -168,40 +165,67 @@ async function ladeEintraege() {
     const r = await fetch(API);
     if (!r.ok) throw new Error();
     const data = await r.json();
-    rendereKarten(data);
-    rendereBadges(data);
+    rendereAccordion(data);
   } catch {
-    document.getElementById('mitbringCards').innerHTML =
+    document.getElementById('mitbringAccordion').innerHTML =
       '<div class="mitbring-leer">⚠️ Liste konnte nicht geladen werden.</div>';
   }
 }
 
-function rendereKarten(eintraege) {
-  const wrap = document.getElementById('mitbringCards');
-  if (!eintraege.length) {
-    wrap.innerHTML = '<div class="mitbring-leer">Noch keine Einträge — sei der Erste! 🙌</div>';
-    return;
-  }
-  wrap.innerHTML = '<div class="mitbring-cards">' +
-    eintraege.map(e => `
-    <div class="mitbring-card">
-      <span class="kat-pill">${esc(e.kategorie)}</span>
-      <div class="card-was">${esc(e.was)}</div>
-      <div class="card-meta">👤 <strong>${esc(e.name)}</strong>${e.menge ? ` · ${esc(e.menge)}` : ''}</div>
-      ${e.kommentar ? `<div class="card-kommentar">💬 ${esc(e.kommentar)}</div>` : ''}
-    </div>`).join('') +
-  '</div>';
+function rendereAccordion(eintraege) {
+  const wrap = document.getElementById('mitbringAccordion');
+
+  // Einträge nach Kategorie gruppieren
+  const gruppen = {};
+  KATEGORIEN.forEach(k => { gruppen[k.name] = []; });
+  eintraege.forEach(e => { if (gruppen[e.kategorie]) gruppen[e.kategorie].push(e); });
+
+  // Erste Kategorie mit Einträgen merken
+  const ersteOffen = KATEGORIEN.find(k => gruppen[k.name].length > 0)?.name || null;
+
+  wrap.innerHTML = KATEGORIEN.map(k => {
+    const items = gruppen[k.name];
+    const n = items.length;
+    const isOffen = k.name === ersteOffen;
+    const vorschau = n
+      ? items.map(e => esc(e.was)).join(' · ')
+      : 'Noch nichts — sei der Erste! 🙌';
+
+    const karten = items.map(e => `
+      <div class="mitbring-card">
+        <div class="card-was">${esc(e.was)}</div>
+        <div class="card-meta">👤 <strong>${esc(e.name)}</strong>${e.menge ? ` · ${esc(e.menge)}` : ''}</div>
+        ${e.kommentar ? `<div class="card-kommentar">💬 ${esc(e.kommentar)}</div>` : ''}
+      </div>`).join('');
+
+    return `
+    <div class="acc-item ${isOffen ? 'open' : ''}" data-kat="${esc(k.name)}">
+      <button class="acc-header" onclick="toggleAcc(this)" type="button">
+        <span class="acc-emoji">${k.emoji}</span>
+        <span class="acc-name">${esc(k.name)}</span>
+        <span class="acc-count ${n ? 'has' : ''}">${n}</span>
+        <span class="acc-preview">${vorschau}</span>
+        <span class="acc-chevron">›</span>
+      </button>
+      <div class="acc-body">
+        ${n ? `<div class="mitbring-cards">${karten}</div>` : '<div class="acc-leer">Noch kein Eintrag in dieser Kategorie.</div>'}
+        <button class="acc-add-btn" type="button" onclick="springeZuFormular('${esc(k.name)}')">
+          + Ich bringe ${esc(k.name)} mit
+        </button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function rendereBadges(eintraege) {
-  const counts = {};
-  eintraege.forEach(e => { counts[e.kategorie] = (counts[e.kategorie] || 0) + 1; });
-  document.getElementById('katBadges').innerHTML = KATEGORIEN.map(k => {
-    const n = counts[k.name] || 0;
-    return `<span class="kat-badge ${n ? 'has-entries' : ''}">
-      ${k.emoji} ${k.name}${n ? ` <span class="kat-count">${n}</span>` : ''}
-    </span>`;
-  }).join('');
+function toggleAcc(btn) {
+  btn.closest('.acc-item').classList.toggle('open');
+}
+
+function springeZuFormular(kategorie) {
+  const sel = document.getElementById('mb-kategorie');
+  sel.value = kategorie;
+  document.getElementById('mb-name').focus();
+  document.querySelector('.mitbring-form-box').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function esc(s) {

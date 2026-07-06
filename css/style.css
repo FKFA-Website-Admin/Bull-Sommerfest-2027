@@ -772,6 +772,115 @@ p { margin-bottom: 1rem; }
   margin-bottom: 2.5rem;
 }
 
+/* ── ACCORDION ──────────────────────────────────── */
+.acc-item {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+
+.acc-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2rem 1fr auto auto 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+}
+
+.acc-header:hover { background: var(--beige-light); }
+
+.acc-emoji { font-size: 1.2rem; line-height: 1; }
+
+.acc-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.acc-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--beige-mid);
+  color: var(--text-muted);
+  border-radius: 12px;
+  padding: 0.1rem 0.55rem;
+  min-width: 1.4rem;
+  text-align: center;
+}
+
+.acc-count.has {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.acc-preview {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 260px;
+}
+
+.acc-chevron {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform 0.25s;
+  line-height: 1;
+  display: block;
+}
+
+.acc-body {
+  display: none;
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--beige-mid);
+}
+
+.acc-item.open .acc-body { display: block; }
+.acc-item.open .acc-chevron { transform: rotate(90deg); }
+.acc-item.open .acc-header { background: var(--beige-light); }
+
+.acc-leer {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.88rem;
+  padding: 0.75rem 0 0.5rem;
+}
+
+.acc-add-btn {
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 1rem;
+  background: none;
+  border: 1.5px solid var(--navy);
+  border-radius: 8px;
+  color: var(--navy);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.acc-add-btn:hover { background: var(--navy); color: var(--white); }
+
+@media (max-width: 600px) {
+  .acc-preview { display: none; }
+  .acc-header { grid-template-columns: 2rem 1fr auto 1.5rem; }
+}
+
 /* Form */
 .mitbring-form-box {
   background: var(--white);
