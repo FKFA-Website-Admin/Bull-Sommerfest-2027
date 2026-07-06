@@ -5,4 +5,4 @@ pages_build_output_dir = "."
 [[d1_databases]]
 binding = "DB"
 database_name = "sommerfest-mitbringsliste"
-database_id = "PLATZHALTER"
+database_id = "0d1cc76e-3ff1-4522-b046-3f334ad33a5a"
