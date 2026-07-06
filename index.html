@@ -10,7 +10,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
+    <a class="nav-logo" href="index.html"><span class="logo-emoji">🌻</span><span class="logo-text">Sommerfest 2027</span></a>
     <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -23,6 +23,7 @@
       <a href="partyraum.html">Partyraum</a>
       <a href="anfahrt.html">Anfahrt</a>
       <a href="samstag.html">Party-Samstag</a>
+      <a href="abreise.html">Abreise</a>
     </div>
   </div>
 </nav>
@@ -32,8 +33,18 @@
   <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>Sommer-Fest der Familie Bull</h1>
-    <p class="subtitle">auf dem Holthof &nbsp;·&nbsp; <span class="hero-date">08. Juli 2027</span></p>
-    <div class="countdown-label">Noch bis zum großen Fest</div>
+    <p class="subtitle">auf dem Holthof</p>
+    <div class="hero-dates">
+      <div class="hero-date-item">
+        <span class="hero-date-label">Familie Bull reist an</span>
+        <span class="hero-date-value">08. Juli 2027</span>
+      </div>
+      <div class="hero-date-item">
+        <span class="hero-date-label">Sommerfest startet</span>
+        <span class="hero-date-value accent">10. Juli 2027</span>
+      </div>
+    </div>
+    <div class="countdown-label">Noch bis zum Sommerfest</div>
     <div class="countdown-boxes" id="countdown">
       <div class="countdown-box"><span class="num" id="cd-days">–</span><span class="unit">Tage</span></div>
       <div class="countdown-box"><span class="num" id="cd-hours">–</span><span class="unit">Stunden</span></div>
@@ -74,7 +85,7 @@ function toggleNav() {
 }
 
 // Countdown bis 08.07.2027 12:00 Uhr
-const target = new Date('2027-07-08T12:00:00');
+const target = new Date('2027-07-10T15:00:00');
 
 function updateCountdown() {
   const now = new Date();

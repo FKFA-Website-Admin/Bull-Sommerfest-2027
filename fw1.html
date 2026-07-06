@@ -9,7 +9,7 @@
 <body>
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html">🌻 Bull Sommerfest</a>
+    <a class="nav-logo" href="index.html"><span class="logo-emoji">🌻</span><span class="logo-text">Sommerfest 2027</span></a>
     <button class="nav-toggle" aria-label="Menü öffnen" onclick="toggleNav()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -22,6 +22,7 @@
       <a href="partyraum.html">Partyraum</a>
       <a href="anfahrt.html">Anfahrt</a>
       <a href="samstag.html">Party-Samstag</a>
+      <a href="abreise.html">Abreise</a>
     </div>
   </div>
 </nav>
@@ -52,11 +53,15 @@
   </div>
 
   <div class="photo-group">
-    <div class="photo-group-label secondary">Grundriss &amp; Bad</div>
+    <div class="photo-group-label secondary">Grundriss &amp; sonstige Ansichten</div>
     <div class="room-images">
       <img src="img/fw1_4.jpg" alt="Grundriss oben" onclick="openLightbox(this.src)">
       <img src="img/fw1_3.jpg" alt="Grundriss unten" onclick="openLightbox(this.src)">
     </div>
+  </div>
+  <div class="room-nav">
+    <a href="pferdestall-oben.html">← Pferdestall oben</a>
+    <a href="fw2.html">Ferienwohnung 2 →</a>
   </div>
 </main>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
